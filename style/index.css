@@ -1,0 +1,30 @@
+.jp-CognosIcon {
+    background-image: url(cognos-logo.png);
+}
+
+.jp-CognosIcon.jp-ImageIcon {
+    background-size: 80% 100%;
+    background-repeat: no-repeat;
+}
+
+.jp-DirListing-item.jp-mod-selected .jp-CognosIcon.jp-ImageIcon {
+    background-image: url(cognos-logo-selected.png);
+    background-size: 80% 100%;
+    background-repeat: no-repeat;
+}
+
+.custom-footer {
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
+#cognos-container {
+    height: 100%;
+}
+
+.reversed {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+}
