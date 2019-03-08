@@ -7,7 +7,7 @@ import {
 } from '@phosphor/coreutils';
 
 import {
-  Widget,
+  Widget
 } from '@phosphor/widgets';
 
 import {
@@ -24,9 +24,9 @@ import {
   IChangedArgs, PathExt, URLExt,
 } from '@jupyterlab/coreutils';
 
-import {
-    Toolbar
-} from '@jupyterlab/apputils';
+// import {
+//     Toolbar
+// } from '@jupyterlab/apputils';
 
 import $ = require('jquery');
 
@@ -47,7 +47,7 @@ export interface ICredential {
 export class CognosDashboardWidget extends DocumentWidget<Widget> {
 
   public content: Widget;
-  public toolbar: Toolbar;
+  public toolbar: any;
   public revealed: Promise<void>;
 
   get dashboardMode() {
