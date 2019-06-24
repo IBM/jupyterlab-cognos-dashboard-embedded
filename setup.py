@@ -25,6 +25,6 @@ setup_dict = dict(
 )
 
 setuptools.setup(
-    version='1.0.0rc.1',
+    version='1.0.0rc.2',
     **setup_dict
 )
