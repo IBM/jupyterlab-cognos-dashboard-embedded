@@ -1,6 +1,6 @@
 {
   "name": "@apset/jupyterlab-cognos-dashboard-embedded",
-  "version": "1.0.0rc.2",
+  "version": "1.0.0rc.3",
   "description": "Cognos Dashboard Embedded for JupyterLab",
   "keywords": [
     "jupyter",
