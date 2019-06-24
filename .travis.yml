@@ -1,0 +1,31 @@
+language: python
+python: '3.6'
+cache:
+  yarn: true
+  pip: true
+  directories:
+    - node_modules
+install:
+  - yarn install
+  - yarn run build
+  - pip install .
+script:
+  - echo "no tests implemented"
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: "cp .npmrc.template $HOME/.npmrc && npm publish"
+    on:
+      branch: master
+      repo: cognitive-class-labs/jupyterlab-cognos-dashboard-embedded
+      tag: true
+  - provider: pypi
+    skip_cleanup: true
+    server: https://na.artifactory.swg-devops.com/artifactory/api/pypi/apset-pypi-local
+    user: james.reeve@ibm.com
+    password:
+      secure: m9cWNcnYVKkKwORzDrpGZD5oQCKC0GhD7D3DXHb5Pf/TBczTAaacfVdpGuE2NFA6bfspCewiX89+g1BGn/yb4T9HDyuq+RlNlRQK6oDk6bYyNamn0TTZYb0xd7yg3y6pJhzk78V1ZBWeTb6ATgu0KGPhuH//wQbWPEvCFmqADKDQvtkdulxKhkUo9IAPXpK9yCJONrCSfAIxXjGtn0tWBBtwmEWw9+wmls8FABj+b8r1vIJtMA3h+VGX2DDJmTSn/r9FCx8lknHSSI7rVQu00nU6L9LkqPKfeEUbDmdTJXFIDFOcVsgmWzOpIWBikrnr8pSKymqsKHxXv6r7f6e9ioioaYiDVvWjsTwo/0NXNZSaynRbQDJJoE7hPXmIQOGmxYCDN54azz9LYHPtOUcd2BnPZKBM3miA4eXCyCyaim6BTsL78UZVjURgQ78eVGrDJnhOgmzbrlnJJVSQWsNIwyuF2OfCTJWkjl7gsXOjlsICcvNi6O6A/Lf7JJsUh+ixvflFXHFnwKiM3CAN8or3IR4Il1pfJxjVBmIxyeUyy8m7ht5TTSKZJSrMQYtl2zjVHR+td8xU1qctdl/iNEEXpAUejZTQlmPALpI44lSiEFzIrMcioREmd3iqBCDZG1tjWuKfVG3GRXH+LZuGtWo70xjr84rTdw6tE5fB+GqoK0Q=
+    on:
+      branch: master
+      repo: cognitive-class-labs/jupyterlab-cognos-dashboard-embedded
+      tag: true

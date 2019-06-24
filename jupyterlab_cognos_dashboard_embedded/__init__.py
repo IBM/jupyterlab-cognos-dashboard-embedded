@@ -9,8 +9,6 @@ from os.path import isfile, join
 from traitlets import Unicode, Bool
 from traitlets.config import SingletonConfigurable
 
-__version__ = '0.1.0'
-
 class CognosDashboardConfig(SingletonConfigurable):
 
     client_id = Unicode(

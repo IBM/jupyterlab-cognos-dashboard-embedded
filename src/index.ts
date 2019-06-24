@@ -1,68 +1,71 @@
 import {
-  ILayoutRestorer, JupyterLab, JupyterLabPlugin,
-} from '@jupyterlab/application';
+  ILayoutRestorer,
+  JupyterFrontEnd,
+  JupyterFrontEndPlugin
+} from "@jupyterlab/application";
 
-import {
-  ICommandPalette,
-} from '@jupyterlab/apputils';
+import { ICommandPalette } from "@jupyterlab/apputils";
 
-import {
-  ILauncher,
-} from '@jupyterlab/launcher';
+import { ILauncher } from "@jupyterlab/launcher";
 
-import {
-  IFileBrowserFactory,
-} from '@jupyterlab/filebrowser';
+import { IFileBrowserFactory } from "@jupyterlab/filebrowser";
 
-import '../style/index.css';
+import "../style/index.css";
 
-import {
-  CognosDashboardFactory,
-} from './editor';
+import { CognosDashboardFactory } from "./editor";
 
-const FACTORY = 'Cognos';
+const FACTORY = "Cognos";
 
 const activate = (
-  app: JupyterLab,
+  app: JupyterFrontEnd,
   palette: ICommandPalette,
   restorer: ILayoutRestorer,
   launcher: ILauncher,
-  browserFactory: IFileBrowserFactory) => {
-
+  browserFactory: IFileBrowserFactory
+) => {
   // const namespace = 'cognos';
-  const factory = new CognosDashboardFactory({ name: FACTORY, fileTypes: ['cognos'], defaultFor: ['cognos'] });
+  const factory = new CognosDashboardFactory({
+    name: FACTORY,
+    fileTypes: ["cognos"],
+    defaultFor: ["cognos"]
+  });
   const { commands } = app;
   // const tracker = new InstanceTracker<CognosDashboardWidget>({ namespace });
 
   const createNewCognosDashboard = (cwd: string) => {
-    return commands.execute('docmanager:new-untitled', {
-      path: cwd, type: 'file', ext: '.cognos',
-    }).then((model: any) => {
-      return commands.execute('docmanager:open', {
-        path: model.path, factory: FACTORY,
+    return commands
+      .execute("docmanager:new-untitled", {
+        path: cwd,
+        type: "file",
+        ext: ".cognos"
+      })
+      .then((model: any) => {
+        return commands.execute("docmanager:open", {
+          path: model.path,
+          factory: FACTORY
+        });
       });
-    });
   };
 
-  const command = 'cognosdashboard:create-new';
+  const command = "cognosdashboard:create-new";
   commands.addCommand(command, {
     execute: () => {
       const cwd = browserFactory.defaultBrowser.model.path;
       return createNewCognosDashboard(cwd);
     },
-    label: 'Cognos Dashboard',
-    caption: 'Cognos Dashboard',
-    iconClass: 'jp-MaterialIcon jp-CognosIcon'
+    label: "Cognos Dashboard",
+    caption: "Cognos Dashboard",
+    iconClass: "jp-MaterialIcon jp-CognosIcon"
   });
 
   if (launcher) {
     launcher.add({
       command,
-      category: 'Other'
+      category: "Other"
     });
   }
 
-  console.log('Cognos Dashboard Extension enabled!');
+  console.log("Cognos Dashboard Extension enabled!");
 
   // factory.widgetCreated.connect((sender, widget) => {
   //   widget.title.icon = 'jp-MaterialIcon jp-ImageIcon';
@@ -75,24 +78,24 @@ const activate = (
 
   // register the filetype
   app.docRegistry.addFileType({
-    name: 'cognos',
-    displayName: 'Cognos Dashboard',
-    mimeTypes: ['application/cognos'],
-    extensions: ['.cognos'],
-    iconClass: 'jp-CognosIcon jp-ImageIcon',
-    fileFormat: 'json',
+    name: "cognos",
+    displayName: "Cognos Dashboard",
+    mimeTypes: ["application/cognos"],
+    extensions: [".cognos"],
+    iconClass: "jp-CognosIcon jp-ImageIcon",
+    fileFormat: "json"
   });
 };
 
 /**
  * Initialization data for the jupyterlab_cognos extension.
  */
-const extension: JupyterLabPlugin<void> = {
-  id: 'jupyterlab_cognos',
+const extension: JupyterFrontEndPlugin<void> = {
+  id: "jupyterlab_cognos",
   autoStart: true,
   requires: [ICommandPalette, ILayoutRestorer, ILauncher, IFileBrowserFactory],
   optional: [],
-  activate,
+  activate
 };
 
 export default extension;
