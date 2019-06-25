@@ -6,14 +6,13 @@ A JupyterLab extension for creating and viewing Cognos Embedded Dashboards.
 
 - Create a conda environment for developing this extension: `conda create -n jupyterlab-cognos-dashboard-embedded -y && conda activate jupyterlab-cognos-dashboard-embedded`
 - install jupyterlab: `pip install jupyterlab==1.0.0rc.0` #`conda install jupyterlab`
+- `cp .env.template .env`
 
 ## Development
 
-- activate your conda environment: `conda activate jupyterlab-cognos-dashboard-embedded`
 - install dependencies and build: `yarn install && yarn run build`
 - install the lab extension: `jupyter labextension link .`
 - install the server extension: `pip install .`
-
 - To watch and automatically rebuild the lab extension run `yarn run watch`
 - In a separate terminal window, run `jupyter lab` to start jupyterlab.
 - Changes to the lab extension will trigger automatic rebuilds of the extension as you make changes.
