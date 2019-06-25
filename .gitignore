@@ -3,3 +3,7 @@ node_modules/
 MANIFEST
 __pycache__/
 jupyterlab_cognos_dashboard_embedded/__pycache__/
+.env
+*.ipynb
+.ipynb_checkpoints/
+*.cognos
