@@ -27,3 +27,10 @@ deploy:
     on:
       repo: cognitive-class-labs/jupyterlab-cognos-dashboard-embedded
       tags: true
+notifications:
+  email: false
+  slack:
+    on_pull_requests: false
+    on_failure: "change"
+    on_success: "change"
+    secure: "Vjo4iOMxhdDRjnfBFKeI7qPRIFccZGxIznqsj29YgD4prEtl3hoJ6UIoa9QiSZgM70fTTfwxtAxuBCo9TWXUNVF5d5LbCX/fGtTwx8ChpsM0pAco+Vqk2IEYBZzU2x1hbWolLTIkaHSVbBWqCV5yRvkOWod6T14axZCAQbJa8khelpxC0xFDxsYdD5BDWl9NdFugetPJbWxr7qxjyTX+B/mEHCm+8BGvCHX+Cd+ysCxlWozhElcvRnxCebDbRYUHkvc9elDue8qFMgFEcRcb6Yo+GFGjA95kLhLmpTybk2Bs7fIQIn86PpeObAIlZHKlKNB8rcN/OHxnzZ87VY2BPosz6Uankw0IUiTOER5knwf++mkhyDo0afRS1GHFr5z0UoPs490+5+nVOpfcuYWgERmP9VWfkxrKCfH7zUKrelRFCiqU21dLszMcMiLqTYcWrBbY3fNKx6grDi/tbv1daasyFq0pyyZWdn5wYm/Mg3iBmBGHxSoSPwl8y57EC4ik3BUcELkN1cT2jqM6KOsAddo/NOWdUxB5PPgGrJ1gnQp6r/8lB7R29cU0UkyGLOvB3slq5odlFAJWFLmYB6yIQ04am3WDk3HomqXGkZj6xUScPlKu5csoH0PGEEqDBb8FlHj7PnYrWEWFg5I4ieF1zhOl2fCyoNl0t7ZWqI/YdAw=" # pragma: whitelist secret
