@@ -111,7 +111,7 @@ export class CognosDashboardWidget extends DocumentWidget<
     const saveButtonDiv = document.createElement("div");
     saveButtonDiv.className = "p-Widget jp-ToolbarButton jp-Toolbar-item";
     saveButtonDiv.innerHTML = `
-        <button class="jp-ToolbarButtonComponent" title="Save the Cognos Dashboard" disabled>
+        <button class="bp3-button bp3-minimal jp-ToolbarButtonComponent minimal jp-Button" title="Save the Cognos Dashboard" disabled>
           <span class="jp-SaveIcon jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
         </button>
       </div>
@@ -123,7 +123,7 @@ export class CognosDashboardWidget extends DocumentWidget<
     const undoButtonDiv = document.createElement("div");
     undoButtonDiv.className = "p-Widget jp-ToolbarButton jp-Toolbar-item";
     undoButtonDiv.innerHTML = `
-        <button class="jp-ToolbarButtonComponent" title="Undo the last action" disabled>
+        <button class="bp3-button bp3-minimal jp-ToolbarButtonComponent minimal jp-Button" title="Undo the last action" disabled>
           <span class="jp-RefreshIcon reversed jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
         </button>
       </div>
@@ -135,7 +135,7 @@ export class CognosDashboardWidget extends DocumentWidget<
     const redoButtonDiv = document.createElement("div");
     redoButtonDiv.className = "p-Widget jp-ToolbarButton jp-Toolbar-item";
     redoButtonDiv.innerHTML = `
-        <button class="jp-ToolbarButtonComponent" title="Redo the last action" disabled>
+        <button class="bp3-button bp3-minimal jp-ToolbarButtonComponent minimal jp-Button" title="Redo the last action" disabled>
           <span class="jp-RefreshIcon jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
         </button>
       </div>
@@ -146,15 +146,16 @@ export class CognosDashboardWidget extends DocumentWidget<
 
     const modeSelectDiv = document.createElement("div");
     modeSelectDiv.className =
-      "p-Widget jp-Notebook-toolbarCellType jp-Toolbar-item";
-    modeSelectDiv.style.height = "22px"; // this is kind of hacky, can't figure out why it's necessary
+      "bp3-html-select bp3-minimal jp-Notebook-toolbarCellTypeDropdown jp-HTMLSelect";
+    // modeSelectDiv.style.height = "28px"; // this is kind of hacky, can't figure out why it's necessary
     modeSelectDiv.innerHTML = `
-      <div class="jp-select-wrapper">
-        <select title="Change the dashboard mode" class="jp-Notebook-toolbarCellTypeDropdown jp-mod-styled">
+      <div>
+        <select title="Change the dashboard mode" class="bp3-html-select bp3-minimal jp-Notebook-toolbarCellTypeDropdown jp-HTMLSelect">
           <option value="VIEW">View Only</option>
           <option value="EDIT">Edit</option>
           <option value="EDIT_GROUP">Edit Group</option>
         </select>
+        <span class="jp-MaterialIcon jp-DownCaretIcon bp3-icon"></span>
       </div>
     `;
     const modeSelect = modeSelectDiv.querySelector("select");
@@ -164,7 +165,7 @@ export class CognosDashboardWidget extends DocumentWidget<
     const propertiesButtonDiv = document.createElement("div");
     propertiesButtonDiv.className = "p-Widget jp-ToolbarButton jp-Toolbar-item";
     propertiesButtonDiv.innerHTML = `
-        <button class="jp-ToolbarButtonComponent" title="Toggle the properties sidebar" disabled>
+        <button class="bp3-button bp3-minimal jp-ToolbarButtonComponent minimal jp-Button" title="Toggle the properties sidebar" disabled>
           <span class="jp-SettingsIcon jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
         </button>
       </div>
@@ -176,7 +177,7 @@ export class CognosDashboardWidget extends DocumentWidget<
     const shareButtonDiv = document.createElement("div");
     shareButtonDiv.className = "p-Widget jp-ToolbarButton jp-Toolbar-item";
     shareButtonDiv.innerHTML = `
-        <button class="jp-ToolbarButtonComponent" title="Share this dashboard" disabled>
+        <button class="bp3-button bp3-minimal jp-ToolbarButtonComponent minimal jp-Button" title="Share this dashboard">
           <span class="jp-LinkIcon jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
         </button>
       </div>
@@ -188,8 +189,8 @@ export class CognosDashboardWidget extends DocumentWidget<
     const tutorialButtonDiv = document.createElement("div");
     tutorialButtonDiv.className = "p-Widget jp-ToolbarButton jp-Toolbar-item";
     tutorialButtonDiv.innerHTML = `
-        <button class="jp-ToolbarButtonComponent" title="Start Cognos Dashboard tutorial">
-          <span class="jp-QuestionMarkIcon jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
+        <button class="bp3-button bp3-minimal jp-ToolbarButtonComponent minimal jp-Button" title="Start Cognos Dashboard tutorial">
+          <span class="jp-LauncherIcon jp-Icon jp-Icon-16 jp-ToolbarButtonComponent-icon"></span>
         </button>
       </div>
     `;
@@ -209,20 +210,16 @@ export class CognosDashboardWidget extends DocumentWidget<
     $.getScript(
       "https://dde-us-south.analytics.ibm.com/daas/CognosApi.js",
       () => {
-        console.log("CognosAPI JS loaded");
         this.startCognosDashboard();
       }
     );
 
     $.getScript(
       "https://unpkg.com/@cognitive-class/jupyterlab-cde-plugin@latest/standalone/jupyterlab-cde-plugin.js",
-      () => {
-        console.log("Jupyterlab CDE Plugin loaded");
-      }
+      () => {}
     );
 
     $.getScript("//fast.appcues.com/37752.js", () => {
-      console.log("Appcues loaded");
       window.Appcues.anonymous();
       window.Appcues.show("-LIrR_X_GfWJHRVQVwz8");
     });
@@ -290,14 +287,9 @@ export class CognosDashboardWidget extends DocumentWidget<
     this._ready.resolve(void 0);
     $("<script>")
       .attr("type", "text/javascript")
-      .attr("async", "false")
-      .text('console.log("started");')
-      .appendTo("head");
-    $("<script>")
-      .attr("type", "text/javascript")
       .text(
         `
-        console.log(CognosApi);
+
         window.api = new CognosApi({
           cognosRootURL: "${apiEndpointUrl}",
           sessionCode: "${sessionCode}",
@@ -308,9 +300,7 @@ export class CognosDashboardWidget extends DocumentWidget<
       )
       .appendTo("head");
     setTimeout(() => {
-      console.log((window as any).api);
       this.cognosApi = (window as any).api;
-      console.log(this);
       this._cognosReady.resolve(void 0);
     }, 1500);
   };
@@ -336,7 +326,6 @@ export class CognosDashboardWidget extends DocumentWidget<
         client_secret: "",
         api_endpoint_url: ""
       }).then(() => {
-        console.log("resetting widget");
         this.startCognosDashboard();
       });
     };
@@ -363,9 +352,7 @@ export class CognosDashboardWidget extends DocumentWidget<
       body: new Private.CredentialsForm(this),
       buttons: [Dialog.cancelButton(), this.credentialsSubmitButton]
     });
-    $(".jp-Dialog-button").click(() => {
-      console.log($("#client_id").val());
-    });
+    $(".jp-Dialog-button").click(() => {});
     if (!result.button.accept) {
       throw new Error("User cancelled");
     } else {
@@ -398,14 +385,8 @@ export class CognosDashboardWidget extends DocumentWidget<
       this._ready.resolve(void 0);
       $("<script>")
         .attr("type", "text/javascript")
-        .attr("async", "false")
-        .text('console.log("started");')
-        .appendTo("head");
-      $("<script>")
-        .attr("type", "text/javascript")
         .text(
           `
-          console.log(CognosApi);
           window.api = new CognosApi({
             cognosRootURL: "${apiEndpointUrl}",
             sessionCode: "${sessionCode}",
@@ -416,9 +397,7 @@ export class CognosDashboardWidget extends DocumentWidget<
         )
         .appendTo("head");
       setTimeout(() => {
-        console.log((window as any).api);
         this.cognosApi = (window as any).api;
-        console.log(this);
         this._cognosReady.resolve(void 0);
       }, 1500);
     } catch (error) {
@@ -426,7 +405,6 @@ export class CognosDashboardWidget extends DocumentWidget<
       if (error.message === "Quota overflow") {
         this.handleDataOverflow();
       } else if (error.message === "User cancelled") {
-        console.log("User cancelled");
       } else {
         this.handleInvalidCredential(error);
       }
@@ -448,41 +426,31 @@ export class CognosDashboardWidget extends DocumentWidget<
       });
     });
 
-  public handleEvent(event: Event): void {
-    console.log("event:");
-    console.log(event);
-  }
+  public handleEvent(event: Event): void {}
 
   public setDashboardMode = (dashboardMode: any) => {
-    console.log("entered setdashboardMode");
     this._dashboardMode = dashboardMode;
     // update availability of toolbar options
     for (const button of [
       this.saveButton,
       this.undoButton,
       this.redoButton,
-      this.propertiesButton,
-      this.shareButton
+      this.propertiesButton
     ]) {
-      console.log("changing state of ");
-      console.log(button);
       button.disabled = dashboardMode === "VIEW";
-      // console.log(button);
+      //
     }
     if (this.dashboardApi) {
-      console.log("in dashboardapi");
       this.dashboardApi.setMode(this.dashboardApi.MODES[dashboardMode]);
     }
-    console.log("updatingmodeselect value");
+
     // update toolbar select dropdown
     this.modeSelect.value = dashboardMode;
   };
 
   public saveDashboard = () => {
-    console.log("trying to save");
     this._saveToContext().then(() => {
       this.context.save();
-      console.log("saved");
     });
   };
   public undo = () => {
@@ -517,18 +485,12 @@ export class CognosDashboardWidget extends DocumentWidget<
         { method: "POST", body: JSON.stringify(dashboard) },
         setting
       ).then((response: any) => {
-        console.log(response);
         response.json().then((data: any) => {
-          console.log(data);
           const link = data.data.url_path;
-          console.log("Your dashboard is available at: ");
-          console.log(
-            "https://showcase.staging.cognitiveclass.ai/dashboards/" +
-              data.data.url_path
-          );
+
           showDialog({
             title:
-              "Your dashboard is now available on Cognitive Class Showcase:",
+              "Your dashboard is now available on Skills Network Showcase:",
             body: new Private.ShowcaseLink(this, link),
             buttons: [Dialog.okButton({ label: "Dismiss" })]
           }).then((result: any) => {
@@ -540,7 +502,6 @@ export class CognosDashboardWidget extends DocumentWidget<
   };
 
   public openTutorialMenu = () => {
-    console.log("opening tutorial menu");
     showDialog({
       title: "Select a tutorial section",
       body: new Private.TutorialMenu(this),
@@ -580,19 +541,14 @@ export class CognosDashboardWidget extends DocumentWidget<
     } // don't waste a session by creating a new dashboard
 
     this.cognosReady.then(() => {
-      console.log("cognosready");
-      console.log("before;");
       this.setDashboardMode("VIEW");
-      console.log("after");
-      console.log(this.cognosApi);
+
       this.cognosApi
         .initialize()
         .then(
           () => {
-            console.log("cognos api initialized");
             const dashboardSpec = this.context.model.toJSON();
             if (dashboardSpec) {
-              console.log("a new dashboard should be created using this spec:");
               this.cognosApi.dashboard
                 .openDashboard({ dashboardSpec })
                 .then((api: any) => {
@@ -601,22 +557,19 @@ export class CognosDashboardWidget extends DocumentWidget<
                   this.dashboardApi = api;
                   window.currentDashboard = api;
                   this.cognosOpen = true;
-                  console.log("Dashboard opened successfully.");
                 });
             } else {
               this.cognosApi.dashboard
                 .createNew()
                 .then((api: any) => {
-                  console.log("cognos in edit mode");
                   this.setDashboardMode("EDIT");
                   this.dashboardApi = api;
                   this.dashboardApi.on("addSource:clicked", this.addSource);
                   window.currentDashboard = api;
                   this.cognosOpen = true;
-                  console.log("Dashboard created successfully.");
                 })
                 .catch((err: any) => {
-                  console.log(err);
+                  console.error(err);
                 });
             }
           },
@@ -647,13 +600,10 @@ export class CognosDashboardWidget extends DocumentWidget<
     new Promise((resolve, reject) => {
       this.dashboardSpec()
         .then(spec => {
-          console.log("Saving the following dashboardSpec:");
-          console.log(spec);
           this.context.model.fromJSON(spec);
           resolve();
         })
         .catch(() => {
-          console.log("Nothing to save, dashboard was empty");
           resolve();
         });
     });
@@ -734,21 +684,35 @@ namespace Private {
 
     const copyButton = document.createElement("button");
     copyButton.className =
-      "p-Widget jp-mod-styled jp-Toolbar-button jp-CopyIcon";
+      "p-Widget jp-mod-styled jp-CopyIcon jp-ToolbarButtonComponent copyShowcaseUrl";
     copyButton.title = "Copy link to clipboard";
     copyButton.setAttribute("style", "width: 30px; height: 30px;");
-    copyButton.onclick = () => {
-      document.addEventListener("copy", (e: ClipboardEvent) => {
-        e.clipboardData.setData("text/plain", fullUrl);
-        e.preventDefault();
-        document.removeEventListener("copy", this);
-      });
-      document.execCommand("copy");
-    };
+
+    const copyIcon = document.createElement("span");
+    copyIcon.className = "jp-CopyIcon jp-Icon jp-Icon-16";
+    copyButton.appendChild(copyIcon);
 
     const linkText = document.createElement("span");
     linkText.setAttribute("style", "padding-right: 10px;");
     linkText.innerHTML = fullUrl;
+
+    copyButton.onclick = () => {
+      // Select the email link anchor text
+      var range = document.createRange();
+      range.selectNode(linkText);
+      window.getSelection().addRange(range);
+
+      try {
+        // Now that we've selected the anchor text, execute the copy command
+        document.execCommand("copy");
+      } catch (err) {
+        console.log("Oops, unable to copy");
+      }
+
+      // Remove the selections - NOTE: Should use
+      // removeRange(range) when it is supported
+      window.getSelection().removeAllRanges();
+    };
 
     body.appendChild(linkText);
     body.appendChild(copyButton);
