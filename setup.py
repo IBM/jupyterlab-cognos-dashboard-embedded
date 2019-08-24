@@ -1,7 +1,7 @@
 import setuptools
 from setupbase import (
     create_cmdclass, find_packages
-    )
+)
 
 data_files_spec = [
     ('etc/jupyter/jupyter_notebook_config.d',
@@ -15,8 +15,8 @@ setup_dict = dict(
     name='jupyterlab_cognos_dashboard_embedded',
     packages=find_packages(),
     cmdclass=cmdclass,
-    author          = 'James Reeve',
-    author_email    = 'james.reeve@ibm.com',
+    author='James Reeve',
+    author_email='james.reeve@ibm.com',
     install_requires=[
         'notebook',
         'requests',
@@ -25,6 +25,6 @@ setup_dict = dict(
 )
 
 setuptools.setup(
-    version='1.0.0',
+    version='1.0.1',
     **setup_dict
 )
