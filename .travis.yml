@@ -16,16 +16,16 @@ deploy:
     skip_cleanup: true
     script: "cp .npmrc.template $HOME/.npmrc && npm publish"
     on:
-      repo: cognitive-class-labs/jupyterlab-cognos-dashboard-embedded
+      repo: skills-network-labs/jupyterlab-cognos-dashboard-embedded
       tags: true
   - provider: pypi
     skip_cleanup: true
     server: https://na.artifactory.swg-devops.com/artifactory/api/pypi/apset-pypi-local
     user: james.reeve@ibm.com
     password:
-      secure: m9cWNcnYVKkKwORzDrpGZD5oQCKC0GhD7D3DXHb5Pf/TBczTAaacfVdpGuE2NFA6bfspCewiX89+g1BGn/yb4T9HDyuq+RlNlRQK6oDk6bYyNamn0TTZYb0xd7yg3y6pJhzk78V1ZBWeTb6ATgu0KGPhuH//wQbWPEvCFmqADKDQvtkdulxKhkUo9IAPXpK9yCJONrCSfAIxXjGtn0tWBBtwmEWw9+wmls8FABj+b8r1vIJtMA3h+VGX2DDJmTSn/r9FCx8lknHSSI7rVQu00nU6L9LkqPKfeEUbDmdTJXFIDFOcVsgmWzOpIWBikrnr8pSKymqsKHxXv6r7f6e9ioioaYiDVvWjsTwo/0NXNZSaynRbQDJJoE7hPXmIQOGmxYCDN54azz9LYHPtOUcd2BnPZKBM3miA4eXCyCyaim6BTsL78UZVjURgQ78eVGrDJnhOgmzbrlnJJVSQWsNIwyuF2OfCTJWkjl7gsXOjlsICcvNi6O6A/Lf7JJsUh+ixvflFXHFnwKiM3CAN8or3IR4Il1pfJxjVBmIxyeUyy8m7ht5TTSKZJSrMQYtl2zjVHR+td8xU1qctdl/iNEEXpAUejZTQlmPALpI44lSiEFzIrMcioREmd3iqBCDZG1tjWuKfVG3GRXH+LZuGtWo70xjr84rTdw6tE5fB+GqoK0Q=
+      secure: p5Yqh5gfQif4XxgEU/dKrUYSXCkavsJ9MqrYfzvfMz7aTj3yWESgYzd89X7KOKuVwdmMwCBBCEUpyRuCvfVGDajE7YwpLfPGrsd2YVer7B7K+G5mc7i7+DzeWGpNn+mHB0CnURGoSHMGmzvrEZZUFd514urIm51aRJCg2NBZX+QsuNYGT1f3WZccr8PU8e7NcFwA3SH/qjXSyUQtT80uonVMUHHMDzQGKlPfnFpw9Q2LMwgqYzjZ9VrHbPQDsYcPmrc6VEHghZVdxhfTWJCo387i3sqZGVwTM7pOLUiFzInxMjWV8UtoeR9q9gi+flqSuUYhMmcylRdsilXyZIl5EuLB0l1tC53Zx2zD2TkmxX8ft7rbbQ2QetyMpflYxKYUqNnjSIu2IeiOUaviNCSGV7zUYRCU3TJ3Mxr2AIylRTWdRq5KkpK5jicH+xoLTgMKn5fQ3RLtXnAkKOv6AIuSVZRph8CziWMp8haeTLnNaV+JSndXuEAWrYyRXQ+c3/PHw76B8JKTc5uK80qGnwmAOO/X/idXdqtHagz2lbn6mmd/JLFCtVc3KC9oQg3LQf/Ebix9PFtotO2WXl4Elbh13Xyh3dqIoWRBKL0WmG6W8E6WcxBJrj/vFEv0ukCuHnedfzEIVdlM9fDLchU4HINTxMO+EP1tEMNUlmjPGOQCEOc
     on:
-      repo: cognitive-class-labs/jupyterlab-cognos-dashboard-embedded
+      repo: skills-network-labs/jupyterlab-cognos-dashboard-embedded
       tags: true
 notifications:
   email: false
