@@ -248,7 +248,7 @@ export class CognosDashboardWidget extends DocumentWidget<
   }
 
   public setCredential = async (credential: ICredential) => {
-    // Send request to /cognos/credentials to set current session crendential
+    // Send request to /cognos/credentials to set current session credential
     const setting = ServerConnection.makeSettings();
     const url = URLExt.join(setting.baseUrl, "/cognos/credentials");
     return ServerConnection.makeRequest(
@@ -361,7 +361,7 @@ export class CognosDashboardWidget extends DocumentWidget<
         client_secret: this.client_secret,
         api_endpoint_url:
           this.api_endpoint_url ||
-          "https://dde-us-south.analytics.ibm.com/daas/"
+          "https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas/"
       });
 
       try {
@@ -372,7 +372,7 @@ export class CognosDashboardWidget extends DocumentWidget<
         if (error.message === "Quota overflow") {
           this.handleDataOverflow();
         } else {
-          this.handleInvalidCredential("Invalid Crendentials");
+          this.handleInvalidCredential("Invalid Credentials");
         }
       }
     }
@@ -749,34 +749,29 @@ namespace Private {
     });
     body.appendChild(clientSecretField);
 
+    const endpoints = [
+      "https://us-south.dynamic-dashboard-embedded.cloud.ibm.com/daas/",
+      "https://eu-gb.dynamic-dashboard-embedded.cloud.ibm.com/daas/",
+      "https://dde-us-south.analytics.ibm.com/daas/",
+      "https://dde-uk-south.analytics.ibm.com/daas/"
+    ];
+    var endpointsDatalist = document.createElement("datalist");
+    endpointsDatalist.id = "endpoints";
+    endpoints.forEach(endpoint => {
+      const option = document.createElement("option");
+      option.value = endpoint;
+      option.text = endpoint;
+      endpointsDatalist.appendChild(option);
+    });
+    body.appendChild(endpointsDatalist);
+    console.log(endpointsDatalist);
+
     const apiEndpointUrlLabel = document.createElement("label");
     apiEndpointUrlLabel.innerHTML = `api_endpoint_url`;
     body.appendChild(apiEndpointUrlLabel);
-    const apiEndpointUrlField = document.createElement("select");
+    const apiEndpointUrlField = document.createElement("input");
     apiEndpointUrlField.id = "api_endpoint_url";
-
-    const options = [
-      {
-        value: "https://dde-us-south.analytics.ibm.com/daas/",
-        label: "https://dde-us-south.analytics.ibm.com/daas",
-        isDefault: true
-      },
-      {
-        value: "https://dde-uk-south.analytics.ibm.com/daas/",
-        label: "https://dde-uk-south.analytics.ibm.com/daas",
-        isDefault: false
-      }
-    ];
-
-    options.forEach(({ value, label, isDefault }) => {
-      const option = document.createElement("option");
-      option.value = value;
-      option.text = label;
-      if (isDefault) {
-        option.setAttribute("selected", "selected");
-      }
-      apiEndpointUrlField.add(option);
-    });
+    apiEndpointUrlField.setAttribute("list", "endpoints");
 
     $(apiEndpointUrlField).change((event: any) => {
       widgetContext.api_endpoint_url = $("#" + apiEndpointUrlField.id).val();
