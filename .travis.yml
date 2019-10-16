@@ -12,12 +12,12 @@ install:
 script:
   - echo "no tests implemented"
 deploy:
-  # - provider: script
-  #   skip_cleanup: true
-  #   script: "cp .npmrc.template $HOME/.npmrc && npm publish"
-  #   on:
-  #     repo: skills-network-labs/jupyterlab-cognos-dashboard-embedded
-  #     tags: true
+  - provider: script
+    skip_cleanup: true
+    script: "cp .npmrc.template $HOME/.npmrc && npm publish"
+    on:
+      repo: skills-network-labs/jupyterlab-cognos-dashboard-embedded
+      tags: true
   - provider: pypi
     skip_cleanup: true
     server: https://na.artifactory.swg-devops.com/artifactory/api/pypi/apset-pypi-local
