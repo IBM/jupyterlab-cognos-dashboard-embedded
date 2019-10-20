@@ -16,10 +16,6 @@ import { Message } from "@phosphor/messaging";
 
 import { IChangedArgs, PathExt, URLExt } from "@jupyterlab/coreutils";
 
-// import {
-//     Toolbar
-// } from '@jupyterlab/apputils';
-
 import $ = require("jquery");
 
 declare global {

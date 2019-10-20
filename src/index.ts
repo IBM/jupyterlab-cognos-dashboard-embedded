@@ -23,14 +23,12 @@ const activate = (
   launcher: ILauncher,
   browserFactory: IFileBrowserFactory
 ) => {
-  // const namespace = 'cognos';
   const factory = new CognosDashboardFactory({
     name: FACTORY,
     fileTypes: ["cognos"],
     defaultFor: ["cognos"]
   });
   const { commands } = app;
-  // const tracker = new InstanceTracker<CognosDashboardWidget>({ namespace });
 
   const createNewCognosDashboard = (cwd: string) => {
     return commands
@@ -66,13 +64,6 @@ const activate = (
   }
 
   console.log("Cognos Dashboard Extension enabled!");
-
-  // factory.widgetCreated.connect((sender, widget) => {
-  //   widget.title.icon = 'jp-MaterialIcon jp-ImageIcon';
-  //   // Notify the instance tracker if restore data needs to update.
-  //   widget.context.pathChanged.connect(() => { tracker.save(widget); });
-  //   tracker.add(widget);
-  // });
 
   app.docRegistry.addWidgetFactory(factory);
 
