@@ -4,33 +4,27 @@ cache:
   yarn: true
   pip: true
   directories:
-    - node_modules
+  - node_modules
 install:
-  - yarn install
-  - yarn run build
-  - pip install .
+- yarn install
+- yarn run build
+- pip install .
 script:
-  - echo "no tests implemented"
+- echo "no tests implemented"
 deploy:
-  - provider: script
+  - provider: npm
+    email: reevejamesd@gmail.com
+    api_key:
+      secure: V27ALzzuv/O3aI1/YHyuNW7mOSaSxyd2b7/4yZhku2yKeLGidA646+KsUSfJiI+ghZWqwO+Nat0L4CKQwVahim7/f54D/wbY6m0hSdZr7w0W3SekLqXQY+LYSbIs1fkwGJ0WDWO0q6SVY0WgK4pcLcRhcQF3dC22yKwSEXZuY+2pzFg7nQacmWM5djwFvsser3VxnIpoK9F4w7og2l5H1plWjcEZbLyNzWv7y05T4C+FOBUEHajYFILi3ohI/lSfYqRza8tx7LFiec58aV6XRHWPkyYWjg0MzZvkYX22PSAger5mR1rXpExDHjkBWbLLf+kJFSV37yIzYzWviQYy9dJYj0p9BDIBpQevz1yAsC8OsECfgewm75RZv1RLiIkpry+P+GConl9cdYbtfJmyRkftOnhyOPvFuROyWCzp+FWMAhQOxxHYue9nFAE74jtdtfKC8yeIKi6bJrVVd0ThlzDx1I3DlDUVPDDVyFeGVKbU43XTQKnmbZtBWGE51MKOFiFTAsjbm4UljhVoJokHEaLe0uYcCDWLXYIyTD3Od+azh3cIAGw4IBC1hgVB2AZp8U0YxTH5cTycQSOPJ1peoSrrOOC8Hn07d8tte/jFDl8ZmmR+ZbQukj8FGArri+FnKESrbz+XN+QAtREG+l9pEhxpnNsVv4kkRHLLa9x5JCU=
     skip_cleanup: true
-    script: "cp .npmrc.template $HOME/.npmrc && npm publish"
     on:
-      repo: skills-network-labs/jupyterlab-cognos-dashboard-embedded
       tags: true
+      repo: IBM/jupyterlab-cognos-dashboard-embedded
   - provider: pypi
-    skip_cleanup: true
-    server: https://na.artifactory.swg-devops.com/artifactory/api/pypi/apset-pypi-local
-    user: james.reeve@ibm.com
+    user: __token__
     password:
-      secure: "O5/P31fW8iL3uBTSMzQRxnFwcrKbiY6+vpkHag1fjfjkg7vgTx8VZlrmFSwW1dzz6Xslevsd4cuDBLUl9qqI+ICACF2PQWYqTB5GnWWsAv6BQJabhDyow0tO5IbEk3AjSZr3atLm16ULb94QhesAMuHb2/bxfnrHDoq4tM06bCW6fjdKq+GiCfr5tF1otbeCu2+bntzJ7rvjQQW3vZIREJOmn5lzb3BsBCBPHeCTjliFV0/zDAEBscwhlK72TenOg+XVgqqAMXPyIMZg498alYjSpXIK1pc0FiHrRo5G8pJj0Hc4w8CfxGLL1JUao35Jk/mOG7FaYVrQOY5kVcbL1901chO8h5q99aMhWJ8LqbyM9uBsRb+nbXQTQIXKmQzgyf01M+i3lIvOu9u/vww6WoVjE9og8oIdXWX6FWQ5XxV4wlaFQkrduKcvI2dqGIyWCmB9Q+fmLo+zy11eAXNzw8pXuog5s/XEHyAKLwrxDZo1C3WDiNrnsMNSJwsfFXU212KXLJDS3m9nkQxbhoRZIkV/P3vkAlM4vIs2ugXMaJZbhEigOnSW5qfDpG4wPosreWsnPUglfOBJu8khhX7ZVnonNrbjLuEl8C7l+RXshSrtflWl+iq1RhWxdePi4mRMfcIpSu2KgKdmqD5DgoCatxR7F6dbOYYRLxvqxWPP8QM="
+      secure: D6Nvt3WEwLKOk0g/3ec22EztQLoUPpgFdFEa5HJOj4W2El4jNtasfk/x3HqBR9BNpnSL7yNRPWkFsHbUXsRF523310gUT+z31bLV+7kc9WqYgKgUlKf2cEtYHgzfgb4e4rXV6GrSSLTGN9SOKnckse6PogIT5iZWc6KBSUOklZssOIhBC7IPQtZQ5YZNJifRyOYlIfEZ59Firmq2YV+awazpU+Y7KTLbdOQ6SCI85CfojdMbTQhldwpGVxZNlFfoqjzpzoNnq3P8cQwHf5oLlFAxT+lnv0WibIswxyGn3Wx+qhLZP0MUbTfnvL1PEr1sQ7TrISPh0A6s5nrdX7ZpScxzm67MiBYt649hWFHboqngX4O7HIRGoMebNfXh+8sOeHdDJL86DOQoMejg6Oe5rmdy48rwELUrboOmXB18jQibXuMOD5uzGunWa5UH6FEroh1nCY+9g1qxV28zjy7iIbZuUOpO+6WovNRjWeU49TpOF6PU3kT/3IJiVQ7SCCg9haWwSGke6x1PQ9i2y+wIA2hBcbE53dgaRY4QKlzse5ROsiaXsf/aecIwSJbaTt+uq5F7kJDMAn3yScZKFRo6ZK7ty1mya2BukV4NKfdVPCG9uRR2amCtR5NbumomYOgLT6bfx4uMzlygNJnyYF2gu1KWF4iA8rtDCOmAqFko1/s=
+    skip_cleanup: true
     on:
-      repo: skills-network-labs/jupyterlab-cognos-dashboard-embedded
       tags: true
-notifications:
-  email: false
-  slack:
-    on_pull_requests: false
-    on_failure: "change"
-    on_success: "change"
-    secure: "4BKLFsMrsh6+IeGhoN+pgrrXfhV5O6xXDMSfEs96ZXs7pSNHrmchrbRESMky/V5R5TCDQbMCzZxYSRUeUM0JLCKDSITke5B3Rcu24ELxqYEqNyd+OWeMhpxObVU6hHOvl2y6aEYLACkuvezS+/r75rgnbtHNYXhq+kGcNw8Vh9uKeJ0EZ87pG5DDDrILN3db2HxPBeelBDP3iLis66Ni5x9aFxs66EmK99UV3nqbSvCjuvWzFrg5LsDOb8jKvYYffjgSMe/oyAxOYhSbBP2/TLohXlPzORc98qIYLy8rbynzTM7vQrtN1skiNslhabbhmvqZdX9+EPSqwZpA15nMFI3DX62L5Tu6SRkGXlfsWIXsoJnHThDs4EGiDrNRS3NCs/761GKTV4fcdCTLk0rssJNeNYPh4p0c2jGKZCbgWoRRhn3vjk6nxVZgjOVbpqAYfeDufiMtylh9B9lW6hCKC9ELrbRw8f6TjZN/dqinjVqXB9tdseYyV0R/vFyKMsHm9AD3CZ8EuxwxsrHVGJJTM5+s165xRfVRnDvnmKOWrqltJi0AA+2xkPh50F96WSe+iXaoVvqYM/V3QrvwQAPR9Ay6Hgqu6c0Obn2OOTgzTRIYPJg+8To77a+REqSyI1JfPOB+GRfvbcTywt2W6xeworgGvGS/sRkdFrn0OFbQ8fI=" # pragma: whitelist secret
+      repo: IBM/jupyterlab-cognos-dashboard-embedded

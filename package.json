@@ -1,5 +1,5 @@
 {
-  "name": "@apset/jupyterlab-cognos-dashboard-embedded",
+  "name": "jupyterlab-cognos-dashboard-embedded",
   "version": "1.0.2",
   "description": "Cognos Dashboard Embedded for JupyterLab",
   "keywords": [
@@ -7,18 +7,15 @@
     "jupyterlab",
     "jupyterlab-extension"
   ],
-  "license": "MIT",
+  "license": "Apache 2",
   "author": "James Reeve",
-  "homepage": "https://github.ibm.com/cognitive-class-labs/jupyterlab-cognos-dashboard-embedded",
+  "homepage": "https://github.com/IBM/jupyterlab-cognos-dashboard-embedded",
   "bugs": {
-    "url": "https://github.ibm.com/cognitive-class-labs/jupyterlab-cognos-dashboard-embedded/issues"
+    "url": "https://github.com/IBM/jupyterlab-cognos-dashboard-embedded/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.ibm.com/cognitive-class-labs/jupyterlab-cognos-dashboard-embedded"
-  },
-  "publishConfig": {
-    "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/apset-npm/"
+    "url": "https://github.com/IBM/jupyterlab-cognos-dashboard-embedded"
   },
   "files": [
     "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",

@@ -1,0 +1,20 @@
+Metadata-Version: 1.2
+Name: jupyterlab-cognos-dashboard-embedded
+Version: 1.0.2
+Summary: UNKNOWN
+Home-page: https://github.com/IBM/jupyterlab-cognos-dashboard-embedded
+Author: James Reeve
+Author-email: james.reeve@ibm.com
+License: Apache 2
+Description: UNKNOWN
+Keywords: Jupyter,JupyterLab,S3
+Platform: Linux
+Platform: Mac OS X
+Platform: Windows
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.5

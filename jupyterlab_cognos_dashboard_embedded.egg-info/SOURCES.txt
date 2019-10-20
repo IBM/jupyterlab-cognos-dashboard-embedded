@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+package.json
+setup.py
+setupbase.py
+jupyter-config/jupyter_notebook_config.d/jupyterlab_cognos_dashboard_embedded.json
+jupyterlab_cognos_dashboard_embedded/__init__.py
+jupyterlab_cognos_dashboard_embedded.egg-info/PKG-INFO
+jupyterlab_cognos_dashboard_embedded.egg-info/SOURCES.txt
+jupyterlab_cognos_dashboard_embedded.egg-info/dependency_links.txt
+jupyterlab_cognos_dashboard_embedded.egg-info/requires.txt
+jupyterlab_cognos_dashboard_embedded.egg-info/top_level.txt
