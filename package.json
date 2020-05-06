@@ -47,7 +47,10 @@
     "@phosphor/widgets": "^1.8.1",
     "@types/jquery": "^3.3.2",
     "@types/react-dom": "^16.8.2",
-    "jquery": "^3.4.0"
+    "jquery": "^3.4.0",
+    "minimist": "^1.2.3",
+    "kind-of": "^6.0.3",
+    "set-value": "^2.0.1"
   },
   "devDependencies": {
     "husky": "^2.4.1",
