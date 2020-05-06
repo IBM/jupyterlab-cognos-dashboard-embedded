@@ -98,7 +98,7 @@ export class CognosDashboardWidget extends DocumentWidget<
 
   constructor(options: DocumentWidget.IOptions<Widget>) {
     super({ ...options });
-    this.context = options["context"];
+    this.context = options.context;
 
     // create toolbar
     const toolbar = document.createElement("div");
@@ -676,7 +676,7 @@ namespace Private {
       "display: inline-flex; align-items: center;  flex-direction: row; padding-bottom: 15px;"
     );
 
-    const fullUrl = "https://showcase.cognitiveclass.ai/dashboards/" + link;
+    const fullUrl = "https://showcase.labs.skills.network/dashboards/" + link;
 
     const copyButton = document.createElement("button");
     copyButton.className =
@@ -694,7 +694,7 @@ namespace Private {
 
     copyButton.onclick = () => {
       // Select the email link anchor text
-      var range = document.createRange();
+      const range = document.createRange();
       range.selectNode(linkText);
       window.getSelection().addRange(range);
 
@@ -751,7 +751,7 @@ namespace Private {
       "https://dde-us-south.analytics.ibm.com/daas/",
       "https://dde-uk-south.analytics.ibm.com/daas/"
     ];
-    var endpointsDatalist = document.createElement("datalist");
+    const endpointsDatalist = document.createElement("datalist");
     endpointsDatalist.id = "endpoints";
     endpoints.forEach(endpoint => {
       const option = document.createElement("option");

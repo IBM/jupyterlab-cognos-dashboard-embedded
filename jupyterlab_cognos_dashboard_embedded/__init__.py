@@ -38,7 +38,7 @@ class CognosDashboardGalleryApiHandler(APIHandler):
         headers = {'Content-Type': 'application/json'}
         body = json.loads(self.request.body)
         data = {
-            'dashboard': {
+            'cognos_dashboard': {
                 'client_id': client_id,
                 'client_secret': client_secret,
                 'cognos_root_url': cognos_root_url,
