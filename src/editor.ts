@@ -4,15 +4,15 @@ import {
   DocumentWidget
 } from "@jupyterlab/docregistry";
 
-import { JSONValue, PromiseDelegate } from "@phosphor/coreutils";
+import { JSONValue, PromiseDelegate } from "@lumino/coreutils";
 
-import { Widget } from "@phosphor/widgets";
+import { Widget } from "@lumino/widgets";
 
 import { ServerConnection } from "@jupyterlab/services";
 
 import { Dialog, showDialog } from "@jupyterlab/apputils";
 
-import { Message } from "@phosphor/messaging";
+import { Message } from "@lumino/messaging";
 
 import { IChangedArgs, PathExt, URLExt } from "@jupyterlab/coreutils";
 
@@ -596,7 +596,7 @@ export class CognosDashboardWidget extends DocumentWidget<
     new Promise((resolve, reject) => {
       this.dashboardSpec()
         .then(spec => {
-          this.context.model.fromJSON(spec);
+          this.context.model.fromJSON(spec as any);
           resolve();
         })
         .catch(() => {

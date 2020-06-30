@@ -5,6 +5,7 @@ __pycache__/
 jupyterlab_cognos_dashboard_embedded/__pycache__/
 .env
 *.ipynb
+*egg*
 .ipynb_checkpoints/
 *.cognos
 .jupyterlab/
