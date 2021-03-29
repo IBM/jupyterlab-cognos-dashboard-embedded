@@ -53,6 +53,7 @@
     "set-value": "^2.0.1"
   },
   "devDependencies": {
+    "@jupyterlab/builder": "^3.0.6",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
