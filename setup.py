@@ -1,43 +1,104 @@
-import setuptools
-from setupbase import (
-    create_cmdclass, find_packages
-)
+"""
+jupyterlab_cognos_dashboard_embedded setup
+"""
+import json
+from pathlib import Path
 
-data_files_spec = [
-    ('etc/jupyter/jupyter_notebook_config.d',
-     'jupyter-config/jupyter_notebook_config.d',
-     'jupyterlab_cognos_dashboard_embedded.json'),
+from jupyter_packaging import (
+    create_cmdclass,
+    install_npm,
+    ensure_targets,
+    combine_commands,
+    skip_if_exists,
+)
+import setuptools
+
+HERE = Path(__file__).parent.resolve()
+
+# The name of the project
+name = "jupyterlab_cognos_dashboard_embedded"
+
+# Get our version
+pkg_json = json.loads((HERE / "package.json").read_bytes())
+version = pkg_json["version"]
+
+lab_path = HERE / name / "labextension"
+
+# Representative files that should exist after a successful build
+jstargets = [
+    str(lab_path / "package.json"),
 ]
 
-cmdclass = create_cmdclass(data_files_spec=data_files_spec)
+package_data_spec = {
+    name: ["*"],
+}
 
-setup_dict = dict(
-    name='jupyterlab_cognos_dashboard_embedded',
-    packages=find_packages(),
+labext_name = "jupyterlab-cognos-dashboard-embedded"
+
+data_files_spec = [
+    ("share/jupyter/labextensions/%s" % labext_name, str(lab_path), "**"),
+    ("share/jupyter/labextensions/%s" % labext_name, str(HERE), "install.json"),
+    (
+        "etc/jupyter/jupyter_server_config.d",
+        "jupyter-config/jupyter_server_config.d",
+        "jupyterlab_cognos_dashboard_embedded.json",
+    ),
+    (
+        "etc/jupyter/jupyter_notebook_config.d",
+        "jupyter-config/jupyter_notebook_config.d",
+        "jupyterlab_cognos_dashboard_embedded.json",
+    ),
+]
+
+
+cmdclass = create_cmdclass(
+    "jsdeps", package_data_spec=package_data_spec, data_files_spec=data_files_spec
+)
+
+js_command = combine_commands(
+    install_npm(HERE, build_cmd="build:prod", npm=["jlpm"]), ensure_targets(jstargets),
+)
+
+is_repo = (HERE / ".git").exists()
+if is_repo:
+    cmdclass["jsdeps"] = js_command
+else:
+    cmdclass["jsdeps"] = skip_if_exists(jstargets, js_command)
+
+#  long_description = (HERE / "README.md").read_text()
+
+setup_args = dict(
+    name=name,
+    version=pkg_json["version"],
+    url=pkg_json["homepage"],
+    author=pkg_json["author"],
+    description=pkg_json["description"],
+    license=pkg_json["license"],
+    packages=setuptools.find_packages(),
     cmdclass=cmdclass,
-    author='James Reeve',
-    author_email='james.reeve@ibm.com',
-    url='https://github.com/IBM/jupyterlab-cognos-dashboard-embedded',
-    license='Apache 2',
     platforms="Linux, Mac OS X, Windows",
-    keywords=['Jupyter', 'JupyterLab', 'S3'],
-    python_requires='>=3.5',
+    keywords=["Jupyter", "JupyterLab", "JupyterLab3", "S3"],
+    python_requires=">=3.6",
+    zip_safe=False,
+    include_package_data=True,
     classifiers=[
-        'Intended Audience :: Developers',
-        'Intended Audience :: Education',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: Apache Software License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
+        "Intended Audience :: Developers",
+        "Intended Audience :: Education",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Framework :: Jupyter",
     ],
     install_requires=[
-        'notebook',
-        'requests',
-        'traitlets'
-    ]
+        "notebook",
+        "requests",
+        "traitlets",
+        "jupyter_server",
+        "jupyterlab>=2.0.0",
+    ],
+    extras_require={"dev": ["jupyter_packaging~=0.7.9"]},
 )
 
-setuptools.setup(
-    version='1.1.1',
-    **setup_dict
-)
+if __name__ == "__main__":
+    setuptools.setup(**setup_args)

@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyterlab = "~=3.0"
+jupyterlab-cognos-dashboard-embedded = {path = "."}
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

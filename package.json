@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-cognos-dashboard-embedded",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Cognos Dashboard Embedded for JupyterLab",
   "keywords": [
     "jupyter",
@@ -23,36 +23,50 @@
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib/"
+  },
   "scripts": {
-    "test": "echo 'not yet implemented'",
-    "build": "tsc",
-    "clean": "rimraf lib",
-    "watch": "tsc -w",
-    "tslint": "tslint",
+    "build": "jlpm run build:lib && jlpm run build:labextension:dev",
+    "build:prod": "jlpm run build:lib && jlpm run build:labextension",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "build:lib": "tsc",
+    "clean": "jlpm run clean:lib",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "clean:labextension": "rimraf jupyterlab_cognos_dashboard_embedded/labextension",
+    "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
+    "eslint": "jlpm run eslint:check --fix",
+    "eslint:check": "eslint . --ext .ts,.tsx",
     "precommit": "lint-staged",
     "prettier": "prettier --write '**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}'",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'"
+    "test": "cd test && ./run-tests.sh",
+    "install:extension": "jupyter labextension develop --overwrite .",
+    "watch": "run-p watch:src watch:labextension",
+    "watch:src": "tsc -w",
+    "watch:labextension": "jupyter labextension watch ."
   },
   "dependencies": {
-    "@jupyterlab/application": "^2.0.0",
-    "@jupyterlab/apputils": "^2.0.0",
-    "@jupyterlab/coreutils": "^4.0.0",
-    "@jupyterlab/docmanager": "^2.0.0",
-    "@jupyterlab/docregistry": "^2.0.0",
-    "@jupyterlab/filebrowser": "^2.0.0",
-    "@jupyterlab/launcher": "^2.0.0",
-    "@jupyterlab/services": "^5.0.0",
-    "@lumino/coreutils": "^1.3.1",
-    "@lumino/messaging": "^1.2.3",
-    "@lumino/widgets": "^1.8.1",
+    "@jupyterlab/application": "^2.0.0 || ^3.0.0",
+    "@jupyterlab/apputils": "^2.0.0 || ^3.0.0",
+    "@jupyterlab/coreutils": "^4.0.0 || ^5.0.0",
+    "@jupyterlab/docmanager": "^2.0.0 || ^3.0.0",
+    "@jupyterlab/docregistry": "^2.0.0 || ^3.0.0",
+    "@jupyterlab/filebrowser": "^2.0.0 || ^3.0.0",
+    "@jupyterlab/launcher": "^2.0.0 ||^3.0.0",
+    "@jupyterlab/services": "^5.0.0 || ^6.0.0",
+    "@lumino/coreutils": "^1.5.3",
+    "@lumino/messaging": "^1.4.3",
+    "@lumino/widgets": "^1.16.1",
     "@types/jquery": "^3.3.2",
-    "@types/react-dom": "^16.9.4",
     "jquery": "^3.4.0",
-    "minimist": "^1.2.3",
     "kind-of": "^6.0.3",
-    "set-value": "^2.0.1"
+    "minimist": "^1.2.3",
+    "set-value": "^2.0.1",
+    "react": "^16.0.0 || ^17.0.0"
   },
   "devDependencies": {
+    "@jupyterlab/builder": "^3.0.6",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
@@ -60,13 +74,21 @@
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "~3.9.2"
+    "typescript": "~4.1.3"
   },
+  "sideEffects": [
+    "style/*.css",
+    "style/index.js"
+  ],
+  "styleModule": "style/index.js",
   "lint-staged": {
     "**/*{.ts,.tsx,.css,.json,.md}": [
       "prettier --write",
       "git add"
     ]
+  },
+  "resolutions": {
+    "@types/react": "^17.0.0"
   },
   "jupyterlab": {
     "extension": true,
@@ -79,6 +101,8 @@
           "name": "jupyterlab_cognos_dashboard_embedded"
         }
       }
-    }
+    },
+    "extension": true,
+    "outputDir": "jupyterlab_cognos_dashboard_embedded/labextension"
   }
 }
