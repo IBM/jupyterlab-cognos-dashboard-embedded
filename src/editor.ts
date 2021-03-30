@@ -36,8 +36,11 @@ export class CognosDashboardWidget extends DocumentWidget<
   Widget,
   DocumentRegistry.IModel
 > {
+  // @ts-ignore
   public content: Widget;
+  // @ts-ignore
   public toolbar: any;
+  // @ts-ignore
   public revealed: Promise<void>;
 
   get dashboardMode() {
@@ -597,10 +600,10 @@ export class CognosDashboardWidget extends DocumentWidget<
       this.dashboardSpec()
         .then(spec => {
           this.context.model.fromJSON(spec as any);
-          resolve();
+          resolve(void 0);
         })
         .catch(() => {
-          resolve();
+          resolve(void 0);
         });
     });
 }

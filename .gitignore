@@ -3,6 +3,7 @@ node_modules/
 MANIFEST
 __pycache__/
 jupyterlab_cognos_dashboard_embedded/__pycache__/
+jupyterlab_cognos_dashboard_embedded/labextension
 .env
 *.ipynb
 *egg*
