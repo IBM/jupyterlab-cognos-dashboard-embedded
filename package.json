@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-cognos-dashboard-embedded",
-  "version": "3.0.0",
+  "version": "3.0.0-dev.0",
   "description": "Cognos Dashboard Embedded for JupyterLab",
   "keywords": [
     "jupyter",
